@@ -1,0 +1,67 @@
+<html dir="rtl" lang="fa">
+<head>
+    <title>تمرین 2</title>
+    <style>
+        input {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div style="text-align: center;">
+        <h1>اطلاعات فرد</h1>
+        <form id="form">
+            <label for="name">نام:</label>
+            <input type="text" id="name" name="name" required><br>
+            <label for="age">سن:</label>
+            <input type="number" id="age" name="age" required><br>
+            <label for="scores">نمرات:</label>
+            <input type="text" id="scores" name="scores" placeholder="نمرات را با کاما جدا کنید" required><br>
+            <input type="submit" value="ثبت">
+        </form>
+        <div id="result"></div>
+    </div>>
+    <script>
+        function bubbleSort(array) {
+            let n = array.length;
+            for (let i = 0; i < n - 1; i++) {
+                for (let j = 0; j < n - i - 1; j++) {
+                    if (array[j] > array[j + 1]) {
+                        let temp = array[j];
+                        array[j] = array[j + 1];
+                        array[j + 1] = temp;
+                    }
+                }
+            }
+            return array;
+        }
+
+        function showResult(person) {
+            let result = document.createElement("p");
+            result.textContent = "نام: " + person.name;
+            result.textContent =  result.textContent + "  |  سن: " + person.age;
+            result.textContent = result.textContent + "  |  نمرات: " + person.scores.join(", ");
+            let resultdiv = document.getElementById("result");
+            resultdiv.appendChild(result);
+        }
+
+        function processForm(event) {
+            event.preventDefault();
+            let name = document.getElementById("name").value;
+            let age = document.getElementById("age").value;
+            let scores = document.getElementById("scores").value.split(",");
+            scores = scores.map(Number);
+            scores = bubbleSort(scores);
+            let person = {
+                name: name,
+                age: age,
+                scores: scores
+            };
+            showResult(person);
+        }
+
+        let form = document.getElementById("form");
+        form.addEventListener("submit", processForm);
+    </script>
+</body>
+</html>
